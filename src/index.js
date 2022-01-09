@@ -1,63 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import { createStore } from 'redux'
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import { createStore } from "redux";
+import counterReducer from "./store/counterReducer";
+import { Provider } from "react-redux";
 
-//=====ACTIONS=======
-const increment=()=>{
-   return {
-     type:"INC",
-     payload:1
-   }
-}
-
-const decrement=()=>{
-   return {
-     type:"DEC",
-     payload:1
-   }
-}
-//==========REDUCER=============
-const initstate={
-  value:0
-}
-
-function counterReducer(state = 0, action) {
-  switch (action.type) {
-    case 'INC':
-      return  state+action.payload 
-      case 'DEC':
-        return state-action.payload 
-        default:
-          return state
-        }
-      }
-      
-      let store = createStore(counterReducer)
-      
-store.subscribe(() => {  console.log('update store: ',  store.getState())  })
-//======Dispatch==============================
-
-store.dispatch(decrement())
-store.dispatch(decrement())
-store.dispatch(decrement())
-store.dispatch(increment())
-
-
-
-
-
-
-
-
-
-
+let store = createStore(counterReducer,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
-
