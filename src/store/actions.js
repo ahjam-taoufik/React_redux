@@ -13,8 +13,23 @@ const increment=(val=1)=>{
     }
  }
 
+const login=()=>{
+    return {
+        type:"LOGIN",
+        
+      } 
+}
+
+const logout=()=>{
+    return {
+        type:"LOGOUT",
+        
+      } 
+}
 
  export {
     increment, 
-    decrement
+    decrement,
+    login,
+    logout
  }
